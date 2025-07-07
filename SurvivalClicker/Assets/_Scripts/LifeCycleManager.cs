@@ -48,6 +48,10 @@ public class LifeCycleManager : MonoBehaviour
             {
                 isGameLost = true;
             }
+            if (Days == 30 && (resourcesManager.Poopulation() < populationWinCondition))
+            {
+                isGameLost=true;
+            }
             inGameUIManager.UpdateText(Days, resourcesManager.Poopulation(), resourcesManager.GetMaxPoopulation(), resourcesManager.Workers, resourcesManager.Unemployed, resourcesManager.Food, resourcesManager.Wood, resourcesManager.Iron, resourcesManager.Farm, resourcesManager.House, resourcesManager.Woodcutter);
 
             timer = 0;

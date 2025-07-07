@@ -30,6 +30,7 @@ public class InGameUIManager : MonoBehaviour
     {
         daysText.text = days.ToString();
         //resources
+        if (unemployed <= 0) { unemployed = 0; }
         poopulationText.text = $"{currentPopulation}/{maxPopulation}\n    Workers:{workers}\n     Unemployed:{unemployed}";
         foodText.text = $"{food}";
         woodText.text = wood.ToString();

@@ -23,15 +23,19 @@ public class GameManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            Time.timeScale = 0;
+            Time.timeScale = 0f;
         }
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            Time.timeScale = 4;
+            Time.timeScale = 4f;
         }
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
-            Time.timeScale = 8;    
+            Time.timeScale = 8f;    
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            Time.timeScale = 16f;
         }
         // one minute is one day
         gameLifeCycle.TimeOfDay();

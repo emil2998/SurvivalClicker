@@ -6,6 +6,7 @@ public class MainMenuManager : MonoBehaviour
 {
     [SerializeField] private GameManager gameManager;
     [SerializeField] private LifeCycleManager lifeCycleManager;
+    [SerializeField] private InGameUIManager inGameUIManager;
 
     [Header("Panels")] [SerializeField]
     private GameObject mainMenuPanel;
@@ -20,6 +21,7 @@ public class MainMenuManager : MonoBehaviour
 
     private void Awake()
     {
+        inGameUIManager = GetComponent<InGameUIManager>();
         gameManager = GetComponent<GameManager>();
         lifeCycleManager = GetComponent<LifeCycleManager>();
     }
@@ -32,10 +34,12 @@ public class MainMenuManager : MonoBehaviour
         if (lifeCycleManager.isGameWon)
         {
             GameWonPanel();
+           
         }
         if (lifeCycleManager.isGameLost)
         {
             GameLosePanel();
+            
         }
     }
 
@@ -43,11 +47,13 @@ public class MainMenuManager : MonoBehaviour
     {
         gamePanel.SetActive(false);
         winGamePanel.SetActive(true);
+        inGameUIManager.UpdateEndGameTexts();
     }
     private void GameLosePanel()
     {
         gamePanel.SetActive(false);
         loseGamePanel.SetActive(true);
+        inGameUIManager.UpdateEndGameTexts();
     }
     private void InitializePanels()
     {

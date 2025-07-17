@@ -21,9 +21,20 @@ public class InGameUIManager : MonoBehaviour
 
     [SerializeField] private TMP_Text notificationText;
 
+    [Header("Win/Lose text")]
+    [SerializeField] private TMP_Text daysSurvivedWinPanelText;
+    [SerializeField] private TMP_Text daysSurvivedLosePanelText;
+    [SerializeField] private TMP_Text playerNameWinPanelText;
+    [SerializeField] private TMP_Text playerNameLosePanelText;
+    [SerializeField] private TMP_InputField playerNameLoseInput;
+    [SerializeField] private TMP_InputField playerNameWinInput;
+
     private void Awake()
     {
         notificationText.text = "";
+        playerNameWinInput.onEndEdit.AddListener(SavePlayerName);
+        playerNameLoseInput.onEndEdit.AddListener(SavePlayerName);
+     
     }
 
     public void UpdateText(int days, int currentPopulation, int maxPopulation, int workers, int unemployed, int food, int wood, int iron, int farm, int house, int woodcutter)
@@ -40,6 +51,28 @@ public class InGameUIManager : MonoBehaviour
         farmText.text = $"Farm: {farm}";
         houseText.text = $"House: {house}";
         woodcutterText.text = $"Wood Cutter: {woodcutter}";
+    }
+
+    public void UpdateEndGameTexts()
+    {
+        Time.timeScale = 0f;
+        daysSurvivedLosePanelText.text = "You survived " + ClickerSave.GetDaysSurvived().ToString() + " days!";
+        daysSurvivedWinPanelText.text = "You survived " + ClickerSave.GetDaysSurvived().ToString() + " days!";
+    }
+
+    private void SavePlayerName(string name)
+    {
+        playerNameLoseInput.readOnly = true;
+        playerNameWinInput.readOnly = true;
+        ClickerSave.SavePlayerName(name);
+        UpdateEndGameTextPlayerName();
+    }
+
+    public void UpdateEndGameTextPlayerName()
+    {
+        string playerName = ClickerSave.GetPlayerName();
+        playerNameLosePanelText.text = playerName + " , you have lost the game!";
+        playerNameWinPanelText.text = playerName + " , you have won the game!";
     }
 
 

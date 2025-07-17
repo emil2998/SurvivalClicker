@@ -43,14 +43,24 @@ public class LifeCycleManager : MonoBehaviour
             if(resourcesManager.Poopulation() >= populationWinCondition)
             {
                isGameWon=true;
+                //ZADACA SA SAVE SYSTEMOM
+                Time.timeScale = 0f;
+                ClickerSave.SaveDaysSurvived(Days);
+
             }
-            if(resourcesManager.Poopulation() <= 0)
+            if (resourcesManager.Poopulation() <= 0)
             {
                 isGameLost = true;
+                Time.timeScale = 0f;
+                ClickerSave.SaveDaysSurvived(Days);
+
             }
             if (Days == 30 && (resourcesManager.Poopulation() < populationWinCondition))
             {
                 isGameLost=true;
+                Time.timeScale = 0f;
+                ClickerSave.SaveDaysSurvived(Days);
+          
             }
             inGameUIManager.UpdateText(Days, resourcesManager.Poopulation(), resourcesManager.GetMaxPoopulation(), resourcesManager.Workers, resourcesManager.Unemployed, resourcesManager.Food, resourcesManager.Wood, resourcesManager.Iron, resourcesManager.Farm, resourcesManager.House, resourcesManager.Woodcutter);
 
